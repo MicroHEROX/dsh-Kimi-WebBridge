@@ -94,7 +94,19 @@ dsh web --patch ./kimi-webbridge.overlay.yml
 
 **Option D — permanent merge:** copy the `insert` block from `cordis.patch.yml` into `$DSH_HOME/profiles/<name>/cordis.patch.yml` (or `$DSH_HOME/cordis.patch.yml` for all profiles).
 
-**Uninstall:** `dsh plugin --profile demo remove dsh-kimi-webbridge` — the CLI reconciles the layer list, the tools unregister, nothing else changes.
+**Uninstall:**
+
+```sh
+dsh plugin --profile demo remove dsh-kimi-webbridge
+```
+
+The CLI removes the dependency and reconciles the profile's layer list; the 15 tools unregister. Verify the row is gone:
+
+```sh
+dsh --profile demo --dump-config    # the kimi-webbridge row must not appear
+```
+
+> ⚠️ **Known harness caveat (dsh 0.1.0-rc.6, [discussion #913](https://github.com/deepseek-ai/deepseek-harness/discussions/913)):** on rare transient pnpm failures the entry can remain in `dsh.profile.bundles`, and the profile then fails to boot with `cannot resolve profile bundle "dsh-kimi-webbridge"` — `dsh plugin install` does **not** fix it (community analysis: [#917](https://github.com/deepseek-ai/deepseek-harness/discussions/917)). **Recovery:** edit the profile's `package.json` and delete `"dsh-kimi-webbridge"` from `dsh.profile.bundles`, then boot again.
 
 > Only runtime files (`index.js`, `cordis.patch.yml`, READMEs, LICENSE) are installed; `docs/` and `tests/` stay in this repository. Verified with `npm pack`.
 

@@ -94,7 +94,19 @@ dsh web --patch ./kimi-webbridge.overlay.yml
 
 **方式 D——长期生效：** 把 `cordis.patch.yml` 中的 `insert` 块合并到 `$DSH_HOME/profiles/<name>/cordis.patch.yml`（或 `$DSH_HOME/cordis.patch.yml` 对所有 profile 生效）。
 
-**卸载：** `dsh plugin --profile demo remove dsh-kimi-webbridge`——CLI 自动对账层列表，工具随之注销，其余一概不动。
+**卸载：**
+
+```sh
+dsh plugin --profile demo remove dsh-kimi-webbridge
+```
+
+CLI 移除依赖并对账 profile 层列表，15 个工具随之注销。验证行已消失：
+
+```sh
+dsh --profile demo --dump-config    # 不应再出现 kimi-webbridge 行
+```
+
+> ⚠️ **已知 harness 坑（dsh 0.1.0-rc.6，[讨论 #913](https://github.com/deepseek-ai/deepseek-harness/discussions/913)）：** 罕见的 pnpm 瞬时失败可能导致条目残留在 `dsh.profile.bundles`，此后 profile 启动报 `cannot resolve profile bundle "dsh-kimi-webbridge"`——`dsh plugin install` **无法**修复（社区复核：[#917](https://github.com/deepseek-ai/deepseek-harness/discussions/917)）。**恢复方法：** 编辑 profile 的 `package.json`，从 `dsh.profile.bundles` 数组中删除 `"dsh-kimi-webbridge"`，再重新启动。
 
 > 安装只打包运行文件（`index.js`、`cordis.patch.yml`、README、LICENSE）；`docs/` 与 `tests/` 只存在于本仓库。已用 `npm pack` 实测确认。
 
