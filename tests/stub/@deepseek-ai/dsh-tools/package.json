@@ -1,0 +1,7 @@
+{
+  "name": "@deepseek-ai/dsh-tools",
+  "version": "0.0.0-test-stub",
+  "type": "module",
+  "main": "index.js",
+  "private": true
+}
