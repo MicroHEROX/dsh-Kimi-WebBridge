@@ -8,7 +8,7 @@
 | 术语 | 定义 |
 |---|---|
 | **dsh** | DeepSeek Harness 的命令行入口（`npx @deepseek-ai/dsh`），以 "一切皆插件" 的 Cordis 组合加载 profile 并启动应用 |
-| **harness / 安装** | dsh CLI 自身及其依赖包图（本文指本机 `AppData\Roaming\npm\node_modules\@deepseek-ai\dsh` 之类安装物）；本插件承诺零修改 |
+| **harness / 安装** | dsh CLI 自身及其依赖包图（本文指本机 `%APPDATA%\npm\node_modules\@deepseek-ai\dsh` 之类安装物）；本插件承诺零修改 |
 | **profile** | 一个可启动的组合：`$DSH_HOME/profiles/<name>/` 下的 `package.json`（含 `dsh.profile.bundles` 层列表）+ 用户 `cordis.patch.yml`。模板：`web`、`headless` |
 | **bundle** | 分发单元：声明 `dsh.bundle.patch` 的 npm 包；其 patch 文件在组合中贡献一行或多行 |
 | **cordis.yml / cordis.patch.yml** | 组合描述文件：`- insert:` 下若干**行（row）**；patch 按行 id 覆盖，后层胜出 |

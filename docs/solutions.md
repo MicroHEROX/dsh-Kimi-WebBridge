@@ -122,7 +122,7 @@ return { type: data?.type ?? 'undefined', value: data?.value ?? null }
 - `dsh plugin` 报 "pnpm not found on PATH"（`apps/cli/src/plugin.ts` spawnSync `pnpm`，Windows 经 shell 调 `.cmd` shim）；
 - `corepack enable pnpm` 报 `EPERM … C:\Program Files\nodejs\pnpx`（写系统目录需管理员）。
 
-**解决方案**：`npm install -g pnpm`（写入用户 `AppData\Roaming\npm`，已在 PATH 上），实测 pnpm v11.21.0。
+**解决方案**：`npm install -g pnpm`（写入用户 `%APPDATA%\npm`，已在 PATH 上），实测 pnpm v11.21.0。
 
 **出处**：`dsh/apps/cli/src/plugin.ts`（pnpm 转发与 ENOENT 提示）；本仓库开发记录
 
@@ -167,7 +167,7 @@ return { type: data?.type ?? 'undefined', value: data?.value ?? null }
 
 **解决方案**：手动编辑 `<profile>/package.json`，从 `dsh.profile.bundles` 数组删除该条目。删除后 profile 恢复启动。
 
-**官方报告**：<https://github.com/deepseek-ai/deepseek-harness/discussions/913>（deepseek-harness 未启用 Issues，使用 Discussions；含根因假设与 3 条修复建议）。
+**官方报告**：<https://github.com/deepseek-ai/deepseek-harness/discussions/913>（deepseek-harness 未启用 Issues，使用 Discussions；含根因假设与 3 条修复建议）。#917 为第三方独立复核（rc.6 源码逐行证实 + 增量发现：错误提示文案本身无效），并提议提交修复 PR。
 
 **出处**：`dsh/apps/cli/src/plugin.ts`（`reconcilePlugins` 的 `if (exitCode === 0)` 门控）；实测环境 dsh v0.1.0-rc.6
 
@@ -213,4 +213,4 @@ return { type: data?.type ?? 'undefined', value: data?.value ?? null }
 | P9 PowerShell JSON | — | — | WebBridge 官方工具说明 |
 | P10 junction | — | part 0 | Node 文档 |
 | P11 组合覆盖 | `cordis.patch.yml` 注释 | — | `dsh/docs/architecture.md` |
-| P12 remove 残留 bundles | —（手动改 profile manifest） | 全周期卸载/残留实测 | `dsh/apps/cli/src/plugin.ts` + discussions #913 |
+| P12 remove 残留 bundles | —（手动改 profile manifest） | 全周期卸载/残留实测 | `dsh/apps/cli/src/plugin.ts` + discussions #913/#917 |
