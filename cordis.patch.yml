@@ -1,0 +1,29 @@
+# dsh-kimi-webbridge: Kimi WebBridge browser tools as a deepseek-harness bundle.
+#
+# This layer inserts a single row that loads the dsh-kimi-webbridge plugin
+# module. The plugin talks to the local Kimi WebBridge daemon
+# (http://127.0.0.1:10086) and registers 15 browser tools on ctx.tools:
+#   kimi_webbridge_navigate      kimi_webbridge_find_tab
+#   kimi_webbridge_list_tabs     kimi_webbridge_snapshot
+#   kimi_webbridge_click         kimi_webbridge_fill
+#   kimi_webbridge_evaluate      kimi_webbridge_cdp
+#   kimi_webbridge_screenshot    kimi_webbridge_network
+#   kimi_webbridge_upload        kimi_webbridge_save_as_pdf
+#   kimi_webbridge_close_tab     kimi_webbridge_close_session
+#   kimi_webbridge_start_daemon
+#
+# Override per deployment by patching this row by id (`kimi-webbridge`) from
+# a later layer (profile cordis.patch.yml or --patch), restating every key
+# you need. `session` names the daemon-side tab group; keep one name per dsh
+# profile so all its tabs land in one group. `requestTimeoutMs` defaults to
+# 120 s (screenshots and page loads can be slow).
+- insert:
+    - id: kimi-webbridge
+      name: dsh-kimi-webbridge
+      config:
+        baseUrl: 'http://127.0.0.1:10086'
+        session: dsh
+        requestTimeoutMs: 120000
+        startDaemonTool: true
+        daemonBin: null
+        maxRenderText: 50000

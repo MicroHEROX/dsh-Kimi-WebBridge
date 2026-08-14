@@ -1,0 +1,6 @@
+# Defense in depth for installs via npm pack (npm publish / pnpm github: deps).
+# docs/ and tests/ live in the source repository only (GitHub); the installed
+# artifact carries just the runtime files declared in package.json "files".
+# These lines document the intent explicitly.
+docs/
+tests/

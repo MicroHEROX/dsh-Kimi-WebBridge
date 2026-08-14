@@ -1,0 +1,36 @@
+{
+  "name": "dsh-kimi-webbridge",
+  "description": "Kimi WebBridge for DeepSeek Harness: drive the user's real browser (navigate, click, fill, snapshot, screenshot, evaluate, network, upload, PDF) through the local Kimi WebBridge daemon",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "kimi",
+    "webbridge",
+    "browser",
+    "web-automation"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-tools": "*"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
