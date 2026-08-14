@@ -160,11 +160,16 @@ return { type: data?.type ?? 'undefined', value: data?.value ?? null }
 - 启动即失败：`dsh: cannot resolve profile bundle "dsh-kimi-webbridge" from the dsh installation or <profileDir>`；
 - 报错提示的自愈命令 `dsh plugin --profile X install` **无效**（实测）。
 
-**根因**：dsh v0.1.0-rc.6 `apps/cli/src/plugin.ts` 的 `reconcilePlugins` 在 remove 场景下未把已移除依赖从 `dsh.profile.bundles` 摘除（`wasDependency`/`stillBundle` 判定在此场景失效）。属 harness 侧 bug，对任何 bundle 的卸载都生效，与本插件无关。
+**归因结论：DeepSeek Harness 侧问题，与插件无关**（已提交官方报告）：
+- 对照实验 4/4 通过：`dsh-exa-mcp`（非本插件）link: 卸载正常；本插件 link: 卸载正常；本插件 github: 卸载正常；完整序列重放正常——残留**非确定性复现**；
+- 失败现场在 harness `apps/cli/src/plugin.ts` 的 `reconcilePlugins` 路径：`reconcile` 仅在 `exitCode === 0` 时运行；若 pnpm 在**已写 manifest 之后**以非零退出（本机 git 操作反复出现 `HEAD https://github.com/... ETIMEDOUT` 瞬断），reconcile 被跳过；
+- 残留条目随后**永久化**：后续每次调用 `wasDependency` 均为 false（依赖已从前后 manifest 消失），移除分支永不触发，条目被当作"用户自有"保留。
 
-**解决方案**：手动编辑 `<profile>/package.json`，从 `dsh.profile.bundles` 数组删除该条目。删除后 profile 恢复启动，组合树不再含该行。完整测试周期实测验证（含修复前后对比）。
+**解决方案**：手动编辑 `<profile>/package.json`，从 `dsh.profile.bundles` 数组删除该条目。删除后 profile 恢复启动。
 
-**出处**：`dsh/apps/cli/src/plugin.ts`（`reconcilePlugins`）；实测环境 dsh v0.1.0-rc.6
+**官方报告**：<https://github.com/deepseek-ai/deepseek-harness/discussions/913>（deepseek-harness 未启用 Issues，使用 Discussions；含根因假设与 3 条修复建议）。
+
+**出处**：`dsh/apps/cli/src/plugin.ts`（`reconcilePlugins` 的 `if (exitCode === 0)` 门控）；实测环境 dsh v0.1.0-rc.6
 
 ---
 
@@ -208,4 +213,4 @@ return { type: data?.type ?? 'undefined', value: data?.value ?? null }
 | P9 PowerShell JSON | — | — | WebBridge 官方工具说明 |
 | P10 junction | — | part 0 | Node 文档 |
 | P11 组合覆盖 | `cordis.patch.yml` 注释 | — | `dsh/docs/architecture.md` |
-| P12 remove 残留 bundles | —（手动改 profile manifest） | 全周期卸载/残留实测 | `dsh/apps/cli/src/plugin.ts` |
+| P12 remove 残留 bundles | —（手动改 profile manifest） | 全周期卸载/残留实测 | `dsh/apps/cli/src/plugin.ts` + discussions #913 |
