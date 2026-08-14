@@ -152,6 +152,20 @@ return { type: data?.type ?? 'undefined', value: data?.value ?? null }
 
 **出处**：`dsh/docs/architecture.md`（组合机制）；`dsh/packages/bundle/base/cordis.patch.yml` 头部注释；本仓库 `cordis.patch.yml` 注释
 
+## P12 dsh rc.6 `dsh plugin remove` 残留 bundles 条目，profile 无法启动
+
+**现象**：`dsh plugin --profile X remove dsh-kimi-webbridge` 后：
+- `node_modules` 与 `package.json` 的 `dependencies` 已正确清理；
+- 但 `dsh.profile.bundles` **仍残留** `dsh-kimi-webbridge`，`--dump-config` 仍显示该行；
+- 启动即失败：`dsh: cannot resolve profile bundle "dsh-kimi-webbridge" from the dsh installation or <profileDir>`；
+- 报错提示的自愈命令 `dsh plugin --profile X install` **无效**（实测）。
+
+**根因**：dsh v0.1.0-rc.6 `apps/cli/src/plugin.ts` 的 `reconcilePlugins` 在 remove 场景下未把已移除依赖从 `dsh.profile.bundles` 摘除（`wasDependency`/`stillBundle` 判定在此场景失效）。属 harness 侧 bug，对任何 bundle 的卸载都生效，与本插件无关。
+
+**解决方案**：手动编辑 `<profile>/package.json`，从 `dsh.profile.bundles` 数组删除该条目。删除后 profile 恢复启动，组合树不再含该行。完整测试周期实测验证（含修复前后对比）。
+
+**出处**：`dsh/apps/cli/src/plugin.ts`（`reconcilePlugins`）；实测环境 dsh v0.1.0-rc.6
+
 ---
 
 ## 方法论
@@ -194,3 +208,4 @@ return { type: data?.type ?? 'undefined', value: data?.value ?? null }
 | P9 PowerShell JSON | — | — | WebBridge 官方工具说明 |
 | P10 junction | — | part 0 | Node 文档 |
 | P11 组合覆盖 | `cordis.patch.yml` 注释 | — | `dsh/docs/architecture.md` |
+| P12 remove 残留 bundles | —（手动改 profile manifest） | 全周期卸载/残留实测 | `dsh/apps/cli/src/plugin.ts` |
