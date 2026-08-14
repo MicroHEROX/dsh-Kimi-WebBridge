@@ -175,7 +175,7 @@ Offline registration + schema-boundary checks always run; live daemon round-trip
 
 - **Plugin:** 0.1.0
 - **Tested with:** dsh 0.1.0-rc.6 · Node 24 (≥18 required) · Kimi WebBridge daemon v1.11.5 / extension 1.11.5 · Windows
-- **Peer dependencies:** `@deepseek-ai/cordis`, `@deepseek-ai/dsh-tools` (resolved from the harness installation — nothing extra to install)
+- **Dependencies:** none declared — `@deepseek-ai/dsh-tools` resolves at runtime from the harness installation (no registry copies are installed)
 
 ## 📚 More docs
 

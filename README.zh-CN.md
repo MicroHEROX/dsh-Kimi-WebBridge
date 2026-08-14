@@ -175,7 +175,7 @@ node tests/smoke.mjs
 
 - **插件版本：** 0.1.0
 - **实测环境：** dsh 0.1.0-rc.6 · Node 24（要求 ≥18）· Kimi WebBridge 守护进程 v1.11.5 / 扩展 1.11.5 · Windows
-- **Peer 依赖：** `@deepseek-ai/cordis`、`@deepseek-ai/dsh-tools`（由 harness 安装解析，无需额外安装）
+- **依赖：** 零声明——`@deepseek-ai/dsh-tools` 运行时由 harness 安装解析（不会从 registry 装副本）
 
 ## 📚 更多文档
 

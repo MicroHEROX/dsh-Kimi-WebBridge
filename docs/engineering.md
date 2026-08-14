@@ -10,7 +10,7 @@
 | 包名 | `dsh-kimi-webbridge` |
 | 形态 | Cordis 插件 bundle（`dsh.bundle.patch`） |
 | 运行时 | 纯 Node ESM，Node ≥ 18，无构建步骤 |
-| 依赖 | peer：`@deepseek-ai/cordis`、`@deepseek-ai/dsh-tools`（由 dsh 安装包图解析） |
+| 依赖 | 零依赖：`@deepseek-ai/dsh-tools` 运行时经 healed closure 由 dsh 安装解析（声明 peerDependencies 会诱导 pnpm 从 registry 装副本并遮蔽 closure，故不声明） |
 | 对外能力 | 15 个 `kimi_webbridge_*` 工具（见 `docs/api-reference.md`） |
 | 不改动 | `deepseek-harness` 安装文件、`$DSH_HOME` 配置（零文件系统访问） |
 

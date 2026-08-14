@@ -24,10 +24,6 @@
     "browser",
     "web-automation"
   ],
-  "peerDependencies": {
-    "@deepseek-ai/cordis": "*",
-    "@deepseek-ai/dsh-tools": "*"
-  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
