@@ -12,11 +12,21 @@
 #   kimi_webbridge_close_tab     kimi_webbridge_close_session
 #   kimi_webbridge_start_daemon
 #
-# Override per deployment by patching this row by id (`kimi-webbridge`) from
-# a later layer (profile cordis.patch.yml or --patch), restating every key
-# you need. `session` names the daemon-side tab group; keep one name per dsh
-# profile so all its tabs land in one group. `requestTimeoutMs` defaults to
-# 120 s (screenshots and page loads can be slow).
+# Override per deployment from a later layer (profile cordis.patch.yml or
+# --patch) by referencing this row's id WITHOUT `insert` — the loader treats
+# an id+name+config patch as an override (an `insert` with the same id would
+# crash the loader with "duplicate loader entry id"):
+#
+#   - id: kimi-webbridge
+#     name: dsh-kimi-webbridge
+#     config:
+#       baseUrl: 'http://127.0.0.1:10086'
+#       session: my-profile
+#       requestTimeoutMs: 120000
+#
+# Restate every key you need. `session` names the daemon-side tab group; keep
+# one name per dsh profile so all its tabs land in one group.
+# `requestTimeoutMs` defaults to 120 s (screenshots and page loads can be slow).
 - insert:
     - id: kimi-webbridge
       name: dsh-kimi-webbridge
