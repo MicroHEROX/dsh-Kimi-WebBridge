@@ -8,7 +8,7 @@
 [![简体中文](https://img.shields.io/badge/简体中文-README-1f6feb?style=for-the-badge&logo=github)](README.zh-CN.md)
 
 [![version](https://img.shields.io/badge/版本-0.1.0-blue)](package.json)
-[![dsh](https://img.shields.io/badge/DeepSeek%20Harness-0.1.0--rc.6-4b6bfb)](https://github.com/deepseek-ai/deepseek-harness)
+[![dsh](https://img.shields.io/badge/DeepSeek%20Harness-0.1.0--rc.7-4b6bfb)](https://github.com/deepseek-ai/deepseek-harness)
 [![WebBridge](https://img.shields.io/badge/Kimi%20WebBridge-v1.11.5-7c3aed)](https://www.kimi.com/zh-cn/features/webbridge)
 [![node](https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs)](https://nodejs.org)
 [![license](https://img.shields.io/badge/license-MIT-2ea44f)](LICENSE)
@@ -54,7 +54,7 @@
 
 | 组件 | 版本 |
 |---|---|
-| DeepSeek Harness（`dsh`） | **0.1.0-rc.6**（已实测）——凡自带 `@deepseek-ai/dsh-tools` 的构建均可工作 |
+| DeepSeek Harness（`dsh`） | **0.1.0-rc.7**（已实测）——凡自带 `@deepseek-ai/dsh-tools` 的构建均可工作 |
 | Node.js | **≥ 18**（全局 `fetch`） |
 | Kimi WebBridge 守护进程 | **v1.11.5**（已实测） |
 | Kimi WebBridge 浏览器扩展 | **1.11.5**（已实测） |
@@ -106,7 +106,7 @@ CLI 移除依赖并对账 profile 层列表，15 个工具随之注销。验证�
 dsh --profile demo --dump-config    # 不应再出现 kimi-webbridge 行
 ```
 
-> ⚠️ **已知 harness 坑（dsh 0.1.0-rc.6，[讨论 #913](https://github.com/deepseek-ai/deepseek-harness/discussions/913)）：** 罕见的 pnpm 瞬时失败可能导致条目残留在 `dsh.profile.bundles`，此后 profile 启动报 `cannot resolve profile bundle "dsh-kimi-webbridge"`——`dsh plugin install` **无法**修复（社区复核：[#917](https://github.com/deepseek-ai/deepseek-harness/discussions/917)）。**恢复方法：** 编辑 profile 的 `package.json`，从 `dsh.profile.bundles` 数组中删除 `"dsh-kimi-webbridge"`，再重新启动。
+> ⚠️ **已知 harness 坑（dsh 0.1.0-rc.7，[讨论 #913](https://github.com/deepseek-ai/deepseek-harness/discussions/913)）：** 罕见的 pnpm 瞬时失败可能导致条目残留在 `dsh.profile.bundles`，此后 profile 启动报 `cannot resolve profile bundle "dsh-kimi-webbridge"`——`dsh plugin install` **无法**修复（社区复核：[#917](https://github.com/deepseek-ai/deepseek-harness/discussions/917)）。**恢复方法：** 编辑 profile 的 `package.json`，从 `dsh.profile.bundles` 数组中删除 `"dsh-kimi-webbridge"`，再重新启动。
 
 > 安装只打包运行文件（`index.js`、`cordis.patch.yml`、README、LICENSE）；`docs/` 与 `tests/` 只存在于本仓库。已用 `npm pack` 实测确认。
 
@@ -136,7 +136,7 @@ dsh --profile demo --dump-config    # 不应再出现 kimi-webbridge 行
 ## ✅ 已完成 / ⚠️ 未完成
 
 **已完成并验证**
-- 15 个工具全部经真实 harness + 真实浏览器端到端验证（dsh 0.1.0-rc.6，守护进程 v1.11.5）：导航、真实点击跳转、表单填写 + 值复核、文件上传 + `files.length` 复核、网络抓取、CDP 布局指标、截图、PDF、标签管理、守护进程自启动。
+- 15 个工具全部经真实 harness + 真实浏览器端到端验证（dsh 0.1.0-rc.7，守护进程 v1.11.5）：导航、真实点击跳转、表单填写 + 值复核、文件上传 + `files.length` 复核、网络抓取、CDP 布局指标、截图、PDF、标签管理、守护进程自启动。
 - 捕获类工具自动重试（新标签首次截图可能因页面未稳定而卡住，重试即秒回）。
 - 守护进程不可达的优雅报错 + 自愈路径（`kimi_webbridge_start_daemon`），已用 `--patch` 指向死端口实测。
 - schema 严格性经真实 `@deepseek-ai/dsh-tools` 编译 + raw-JSON-schema 边界校验（`tests/smoke.mjs`）。
@@ -186,7 +186,7 @@ node tests/smoke.mjs
 ## 📌 版本与兼容性
 
 - **插件版本：** 0.1.0
-- **实测环境：** dsh 0.1.0-rc.6 · Node 24（要求 ≥18）· Kimi WebBridge 守护进程 v1.11.5 / 扩展 1.11.5 · Windows
+- **实测环境：** dsh 0.1.0-rc.7 · Node 24（要求 ≥18）· Kimi WebBridge 守护进程 v1.11.5 / 扩展 1.11.5 · Windows
 - **依赖：** 零声明——`@deepseek-ai/dsh-tools` 运行时由 harness 安装解析（不会从 registry 装副本）
 
 ## 📚 更多文档
