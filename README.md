@@ -8,7 +8,7 @@
 [![简体中文](https://img.shields.io/badge/简体中文-README-1f6feb?style=for-the-badge&logo=github)](README.zh-CN.md)
 
 [![version](https://img.shields.io/badge/version-0.1.0-blue)](package.json)
-[![dsh](https://img.shields.io/badge/DeepSeek%20Harness-0.1.0--rc.8-4b6bfb)](https://github.com/deepseek-ai/deepseek-harness)
+[![dsh](https://img.shields.io/badge/DeepSeek%20Harness-0.1.1--rc.1-4b6bfb)](https://github.com/deepseek-ai/deepseek-harness)
 [![WebBridge](https://img.shields.io/badge/Kimi%20WebBridge-v1.11.5-7c3aed)](https://www.kimi.com/zh-cn/features/webbridge)
 [![node](https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs)](https://nodejs.org)
 [![license](https://img.shields.io/badge/license-MIT-2ea44f)](LICENSE)
@@ -54,7 +54,7 @@
 
 | Component | Version |
 |---|---|
-| DeepSeek Harness (`dsh`) | **0.1.0-rc.8** (tested) — any build shipping `@deepseek-ai/dsh-tools` should work |
+| DeepSeek Harness (`dsh`) | **0.1.0-rc.8 / 0.1.1-rc.1** (tested) — any build shipping `@deepseek-ai/dsh-tools` should work |
 | Node.js | **≥ 18** (global `fetch`) |
 | Kimi WebBridge daemon | **v1.11.5** (tested) |
 | Kimi WebBridge browser extension | **1.11.5** (tested) |
@@ -186,7 +186,7 @@ Offline registration + schema-boundary checks always run; live daemon round-trip
 ## 📌 Version & compatibility
 
 - **Plugin:** 0.1.0
-- **Tested with:** dsh 0.1.0-rc.8 · Node 24 (≥18 required) · Kimi WebBridge daemon v1.11.5 / extension 1.11.5 · Windows
+- **Tested with:** dsh 0.1.0-rc.8 / 0.1.1-rc.1 · Node 24 (≥18 required) · Kimi WebBridge daemon v1.11.5 / extension 1.11.5 · Windows
 - **Dependencies:** none declared — `@deepseek-ai/dsh-tools` resolves at runtime from the harness installation (no registry copies are installed)
 
 ## 📚 More docs

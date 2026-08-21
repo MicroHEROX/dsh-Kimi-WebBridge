@@ -8,7 +8,7 @@
 [![简体中文](https://img.shields.io/badge/简体中文-README-1f6feb?style=for-the-badge&logo=github)](README.zh-CN.md)
 
 [![version](https://img.shields.io/badge/版本-0.1.0-blue)](package.json)
-[![dsh](https://img.shields.io/badge/DeepSeek%20Harness-0.1.0--rc.8-4b6bfb)](https://github.com/deepseek-ai/deepseek-harness)
+[![dsh](https://img.shields.io/badge/DeepSeek%20Harness-0.1.1--rc.1-4b6bfb)](https://github.com/deepseek-ai/deepseek-harness)
 [![WebBridge](https://img.shields.io/badge/Kimi%20WebBridge-v1.11.5-7c3aed)](https://www.kimi.com/zh-cn/features/webbridge)
 [![node](https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs)](https://nodejs.org)
 [![license](https://img.shields.io/badge/license-MIT-2ea44f)](LICENSE)
@@ -54,7 +54,7 @@
 
 | 组件 | 版本 |
 |---|---|
-| DeepSeek Harness（`dsh`） | **0.1.0-rc.8**（已实测）——凡自带 `@deepseek-ai/dsh-tools` 的构建均可工作 |
+| DeepSeek Harness（`dsh`） | **0.1.0-rc.8 / 0.1.1-rc.1**（已实测）——凡自带 `@deepseek-ai/dsh-tools` 的构建均可工作 |
 | Node.js | **≥ 18**（全局 `fetch`） |
 | Kimi WebBridge 守护进程 | **v1.11.5**（已实测） |
 | Kimi WebBridge 浏览器扩展 | **1.11.5**（已实测） |
@@ -186,7 +186,7 @@ node tests/smoke.mjs
 ## 📌 版本与兼容性
 
 - **插件版本：** 0.1.0
-- **实测环境：** dsh 0.1.0-rc.8 · Node 24（要求 ≥18）· Kimi WebBridge 守护进程 v1.11.5 / 扩展 1.11.5 · Windows
+- **实测环境：** dsh 0.1.0-rc.8 / 0.1.1-rc.1 · Node 24（要求 ≥18）· Kimi WebBridge 守护进程 v1.11.5 / 扩展 1.11.5 · Windows
 - **依赖：** 零声明——`@deepseek-ai/dsh-tools` 运行时由 harness 安装解析（不会从 registry 装副本）
 
 ## 📚 更多文档
